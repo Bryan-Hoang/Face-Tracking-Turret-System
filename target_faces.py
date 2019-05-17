@@ -1,3 +1,4 @@
+# pylint: disable=no-member
 import cv2
 import serial_interface as si
 
@@ -9,6 +10,15 @@ RANGE = [50, 600]
 SCREEN_CENTRE = (RANGE[0] + RANGE[1]) / 2
 
 SCALE = FOV / (RANGE[1] - RANGE[0])
+
+
+def main():
+    target_faces()
+    print("Finished target practice.")
+
+
+if __name__ == "__main__":
+    main()
 
 
 def target_faces():
@@ -57,14 +67,6 @@ def adjust_power(distance_ratio):
     power = round(distance_ratio * 100)
     if power > 255:
         power = 255
-    si.launch(power)
     print("Power = " + str(power))
-
-
-def main():
-    target_faces()
-    print("Finished target practice.")
-
-
-if __name__ == "__main__":
-    main()
+    # Haven't implemented launching power. Proof of concept.
+    si.launch()

@@ -1,3 +1,4 @@
+# pylint: disable=import-error
 import serial
 
 ser = serial.Serial('/dev/tty.usbmodem14101', 9600)
