@@ -1,10 +1,5 @@
-"""
-
-"""
-
 import cv2
-
-# import SerialInterface as si
+import serial_interface as si
 
 # Change based on hardware to optimize aiming calculation
 BASE_HEIGHT = 40
@@ -17,15 +12,8 @@ SCALE = FOV / (RANGE[1] - RANGE[0])
 
 
 def target_faces():
-    """
-
-    :return:
-    """
-
     # The detection mode based on the xml file
-    face_cascade = cv2.CascadeClassifier(
-        "haarcascade_frontalface_default.xml"
-    )
+    face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
     # Which video device the program will use
     video_capture = cv2.VideoCapture(0)
     while True:
@@ -54,43 +42,26 @@ def target_faces():
 
 
 def turn_catapult(hor_target_pos):
-    """
-
-
-    :param hor_target_pos:
-    :return:
-    """
     offset = hor_target_pos - SCREEN_CENTRE
     turn_degree = round(abs(offset * SCALE))
     print("Degree = " + str(turn_degree))
-    # if offset > 0:
-    #     # Call the turn right function
-    #     si.clockwise(turn_degree)
-    # else:
-    #     # Call the turn left function
-    #     si.counter_clockwise(turn_degree)
+    if offset > 0:
+        # Call the turn right function
+        si.clockwise(turn_degree)
+    else:
+        # Call the turn left function
+        si.counter_clockwise(turn_degree)
 
 
 def adjust_power(distance_ratio):
-    """
-
-
-    :param distance_ratio:
-    :return:
-    """
     power = round(distance_ratio * 100)
     if power > 255:
         power = 255
-    # si.launch(power)
+    si.launch(power)
     print("Power = " + str(power))
 
 
 def main():
-    """
-
-
-    :return:
-    """
     target_faces()
     print("Finished target practice.")
 
