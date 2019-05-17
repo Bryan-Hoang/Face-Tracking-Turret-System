@@ -12,15 +12,6 @@ SCREEN_CENTRE = (RANGE[0] + RANGE[1]) / 2
 SCALE = FOV / (RANGE[1] - RANGE[0])
 
 
-def main():
-    target_faces()
-    print("Finished target practice.")
-
-
-if __name__ == "__main__":
-    main()
-
-
 def target_faces():
     # The detection mode based on the xml file
     face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
@@ -70,3 +61,12 @@ def adjust_power(distance_ratio):
     print("Power = " + str(power))
     # Haven't implemented launching power. Proof of concept.
     si.launch()
+
+    
+def main():
+    target_faces()
+    print("Finished target practice.")
+
+
+if __name__ == "__main__":
+    main()
